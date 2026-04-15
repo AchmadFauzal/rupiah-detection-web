@@ -1,14 +1,26 @@
 import streamlit as st
 from ultralytics import YOLO
+import torch
+from ultralytics.nn.tasks import DetectionModel
 import cv2
 import numpy as np
 from collections import Counter
 from PIL import Image
 
-# Load model
+# =========================
+# FIX PYTORCH ERROR
+# =========================
+torch.serialization.add_safe_globals([DetectionModel])
+
+# =========================
+# LOAD MODEL
+# =========================
 model = YOLO("best_model.pt")
 
-# Mapping nominal
+# =========================
+# MAPPING NOMINAL
+# =========================
+
 nominal_map = {
     0: 1000,
     1: 10000,
